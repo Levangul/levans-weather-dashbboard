@@ -5,6 +5,7 @@ let searchedCity = document.getElementById('cityname')
 let button = document.getElementById('button')
 let apiKey = '56cb8785bd6021e59f6df2e539cf6f2c'
 let searchHistory = []
+let city = '' || 'brooklyn'
 
 
 
@@ -45,5 +46,5 @@ function displayWeather(city) {
 
 
 
-
+displayWeather(city)
 
