@@ -1,0 +1,56 @@
+
+body {
+    background-color: #f2f2f2;
+    margin: 0%;
+    
+}
+header {
+    display: flex;
+    justify-content: center;
+    background-color: #0074D9;
+    color: #f2f2f2;
+
+    }
+
+
+
+
+.box {
+    display: flex;
+    flex-direction: row;
+    font-size: 30px;
+    padding-left: 20px;
+    
+    
+}
+section {
+    padding-left:20px;
+    
+}
+
+button {
+    background-color: #0074D9 ;
+    margin-top: 8px;
+    color: #f2f2f2;
+    
+    
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    padding-right: 150px;
+    width: 200px;
+    
+    
+}
+#five-day {
+    
+    list-style: none;
+    text-align: center;
+    display: inline-block;
+    justify-content: space-around;
+    padding: 15px;
+    border:2px solid gray
+}
