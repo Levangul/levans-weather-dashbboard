@@ -36,13 +36,22 @@
             <p id="current-city-humidity">Humidity: </p>
 
             <div id="five-day">
-                <p>5-Day Forecast:</p>
+
+                <h3 id="forecast-title"></h3>
+                <div id="forecasts-cards">
+                    <p class="forecast-box" id="forecast-date"></p>
+                    <img class="forecast-box" id="forecast-icon">
+                    <p class="forecast-box" id="forecast-temp"></p>
+                    <p class="forecast-box" id="forecast-wind"></p>
+                    <p class="forecast-box" id="forecast-humidity"></p>
+                </div>
+
 
             </div>
 
         </section>
 
-
+        <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
 
         <script src="./assets/js/script.js"></script>
 </body>
