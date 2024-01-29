@@ -5,22 +5,43 @@ let searchedCity = document.getElementById('cityname')
 let button = document.getElementById('button')
 let apiKey = '56cb8785bd6021e59f6df2e539cf6f2c'
 let fiveDayForecast = document.getElementById('five-day')
-let searchHistory = []
-let city = '' || 'London';
+let searchHistory = document.getElementById('search-history')
+let city = '' || 'Tbilisi';
 
 
 button.addEventListener("click", function (event) {
     event.preventDefault()
 
 
+
+
     let city = searchedCity.value
     if (city !== "") {
         displayWeather(city)
+        storeCity()
+        recentCity()
 
 
     }
-
 })
+console.log(button)
+
+function recentCity() {
+
+    let lastSearch = JSON.parse(localStorage.getItem("city"));
+    list = document.createElement('li')
+    list.textContent = lastSearch
+    list.setAttribute("class", "list")
+    searchHistory.appendChild(list)
+    console.log(lastSearch)
+
+}
+
+function storeCity() {
+    // Stringify and set "cities" key in localStorage to cities array
+    localStorage.setItem("city", JSON.stringify(city))
+    console.log(localStorage);
+}
 
 function displayWeather(city) {
     let apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=imperial";
@@ -43,13 +64,13 @@ function displayWeather(city) {
                     cityName.textContent = data.name + " " + date
                     cityName.appendChild(icon)
 
+                    console.log(searchHistory)
+
 
                     console.log(data)
                     forecast(lon, lat)
-
                 }
                 )
-
             }
         })
 }
@@ -68,6 +89,7 @@ function forecast(lat, lon) {
 
             let forecastTitle = document.createElement('h3');
             forecastTitle.textContent = "5-day forecast:";
+            fiveDayForecast.innerHTML = ''
             for (let i = 0; i < 5; i++) {
                 // Create a new container element for each day's forecast
                 let forecastContainer = document.createElement('div');
@@ -89,19 +111,19 @@ function forecast(lat, lon) {
                 forecastTemp.textContent = "Temp: " + Math.floor(forecastData.list[i].main.temp) + "°F";
 
                 let forecastWind = document.createElement('p');
-                forecastWind.textContent = "Wind: " + forecastData.list[i].wind.speed + "Mph";
+                forecastWind.textContent = "Wind: " + Math.floor(forecastData.list[i].wind.speed) + "Mph";
 
                 let forecastHumidity = document.createElement('p');
                 forecastHumidity.textContent = "Humidity: " + forecastData.list[i].main.humidity + "%";
 
-                // Append the elements to the forecast container
 
+                // Append the elements to the forecast container
+                
                 forecastContainer.appendChild(forecastDate);
                 forecastContainer.appendChild(forecastIcon);
                 forecastContainer.appendChild(forecastTemp);
                 forecastContainer.appendChild(forecastWind);
                 forecastContainer.appendChild(forecastHumidity);
-
                 // Append the forecast container to the parent element
                 fiveDayForecast.appendChild(forecastContainer);
             }

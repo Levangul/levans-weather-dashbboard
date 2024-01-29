@@ -13,7 +13,12 @@ header {
     }
 
 
+.list {
+    list-style-type: none;
+    border:2px solid gray;
+    width:fit-content;
 
+}
 
 .box {
     display: flex;
