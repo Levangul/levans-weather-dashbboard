@@ -108,10 +108,10 @@ function forecast(lat, lon) {
                 forecastIcon.src = "https://openweathermap.org/img/w/" + forecastData.list[i].weather[0].icon + ".png";
 
                 let forecastTemp = document.createElement('p');
-                forecastTemp.textContent = "Temp: " + Math.floor(forecastData.list[i].main.temp) + "°F";
+                forecastTemp.textContent = "Temp: " + Math.round(forecastData.list[i].main.temp) + "°F";
 
                 let forecastWind = document.createElement('p');
-                forecastWind.textContent = "Wind: " + Math.floor(forecastData.list[i].wind.speed) + "Mph";
+                forecastWind.textContent = "Wind: " + Math.round(forecastData.list[i].wind.speed) + "Mph";
 
                 let forecastHumidity = document.createElement('p');
                 forecastHumidity.textContent = "Humidity: " + forecastData.list[i].main.humidity + "%";
