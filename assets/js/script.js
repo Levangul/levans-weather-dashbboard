@@ -1,47 +1,32 @@
 
 let date = dayjs().format('(MM/DD/YY)')
-console.log(date)
 let searchedCity = document.getElementById('cityname')
 let button = document.getElementById('button')
 let apiKey = '56cb8785bd6021e59f6df2e539cf6f2c'
 let fiveDayForecast = document.getElementById('five-day')
 let searchHistory = document.getElementById('search-history')
 let city = '' || 'Tbilisi';
+let historyList = [];
 
+
+
+//* function to take value of input after click and show weather and store into localstorage
 
 button.addEventListener("click", function (event) {
-    event.preventDefault()
+    event.preventDefault();
 
+    let city = searchedCity.value;
 
-
-
-    let city = searchedCity.value
     if (city !== "") {
-        displayWeather(city)
-        storeCity()
-        recentCity()
-
-
+        displayWeather(city);
+        recentCity(city);
+        localStorage.setItem('city', JSON.stringify(historyList));
+        console.log(localStorage);
     }
-})
-console.log(button)
+});
 
-function recentCity() {
 
-    let lastSearch = JSON.parse(localStorage.getItem("city"));
-    list = document.createElement('li')
-    list.textContent = lastSearch
-    list.setAttribute("class", "list")
-    searchHistory.appendChild(list)
-    console.log(lastSearch)
-
-}
-
-function storeCity() {
-    // Stringify and set "cities" key in localStorage to cities array
-    localStorage.setItem("city", JSON.stringify(city))
-    console.log(localStorage);
-}
+//* get information from api and show 
 
 function displayWeather(city) {
     let apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=imperial";
@@ -63,7 +48,6 @@ function displayWeather(city) {
                     wind.textContent = "Wind: " + data.wind.speed + "Mph";
                     cityName.textContent = data.name + " " + date
                     cityName.appendChild(icon)
-
                     console.log(searchHistory)
 
 
@@ -75,9 +59,11 @@ function displayWeather(city) {
         })
 }
 
+//* forecast for next five days 
 
 function forecast(lat, lon) {
     let forecastUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=imperial";
+
 
     fetch(forecastUrl)
         .then(function (response) {
@@ -90,7 +76,8 @@ function forecast(lat, lon) {
             let forecastTitle = document.createElement('h3');
             forecastTitle.textContent = "5-day forecast:";
             fiveDayForecast.innerHTML = ''
-            for (let i = 0; i < 5; i++) {
+
+            for (let i = 4; i < forecastData.list.length; i = i + 8) {
                 // Create a new container element for each day's forecast
                 let forecastContainer = document.createElement('div');
                 forecastContainer.setAttribute("class", "card")
@@ -108,17 +95,17 @@ function forecast(lat, lon) {
                 forecastIcon.src = "https://openweathermap.org/img/w/" + forecastData.list[i].weather[0].icon + ".png";
 
                 let forecastTemp = document.createElement('p');
-                forecastTemp.textContent = "Temp: " + Math.floor(forecastData.list[i].main.temp) + "°F";
+                forecastTemp.textContent = "Temp: " + Math.round(forecastData.list[i].main.temp) + "°F";
 
                 let forecastWind = document.createElement('p');
-                forecastWind.textContent = "Wind: " + Math.floor(forecastData.list[i].wind.speed) + "Mph";
+                forecastWind.textContent = "Wind: " + Math.round(forecastData.list[i].wind.speed) + "Mph";
 
                 let forecastHumidity = document.createElement('p');
                 forecastHumidity.textContent = "Humidity: " + forecastData.list[i].main.humidity + "%";
 
 
                 // Append the elements to the forecast container
-                
+
                 forecastContainer.appendChild(forecastDate);
                 forecastContainer.appendChild(forecastIcon);
                 forecastContainer.appendChild(forecastTemp);
@@ -131,6 +118,33 @@ function forecast(lat, lon) {
         })
 }
 
+function recentCity(city) {
+    historyList;
+    JSON.parse(localStorage.getItem('historyList'));
+
+    if (city) {
+        historyList.push(city);
+    }
+
+    let list = document.createElement('li');
+    list.textContent = city;
+    list.setAttribute("class", "list");
+    searchHistory.appendChild(list);
+
+    console.log(historyList);
+
+
+
+    let histButton = document.querySelector('.list')
+
+    histButton.addEventListener("click", function (event) {
+        event.preventDefault()
+        displayWeather(city);
+        forecast(lat, lon)
+    })
+
+
+}
 
 
 
@@ -141,5 +155,6 @@ function forecast(lat, lon) {
 
 
 displayWeather(city)
+recentCity(city)
 
 
