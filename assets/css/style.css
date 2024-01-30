@@ -27,6 +27,7 @@ header {
     padding-left: 20px;
     
     
+    
 }
 
 
@@ -52,7 +53,7 @@ button {
     
     
     background-color: #0074D9 ;
-    margin-right: 20px;
+    margin: 20px;
 }
 
 form {
@@ -68,6 +69,6 @@ form {
     flex-direction: row;
     text-align: center;
     padding: 15px;
-    border:2px solid gray
-    
+    border:2px solid gray;
+    flex-wrap: wrap;
 }
