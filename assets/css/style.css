@@ -24,10 +24,7 @@ header {
     display: flex;
     flex-direction: row;
     font-size: 30px;
-    padding-left: 20px;
-    
-    
-    
+    padding-left: 20px;  
     
     
 }
@@ -79,7 +76,7 @@ form {
 }
 
 @media screen and (max-width:862px) {
-    body {
+body {
     margin: 0%;
     padding: 0%;
     flex-direction: column;
@@ -95,6 +92,12 @@ form {
     padding-left: 0%;
     
 }
+aside {
+    display: flex;
+    align-items: center;
+}
 
-
+section {
+    justify-content: center;
+}
 }
