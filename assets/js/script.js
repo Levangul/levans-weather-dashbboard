@@ -7,7 +7,7 @@ let fiveDayForecast = document.getElementById('five-day')
 let searchHistory = document.getElementById('search-history')
 let city = '' || 'Tbilisi';
 let historyList = [];
-
+console.log(historyList)
 
 
 //* function to take value of input after click and show weather and store into localstorage
@@ -20,13 +20,14 @@ button.addEventListener("click", function (event) {
     if (city !== "") {
         displayWeather(city);
         recentCity(city);
-        localStorage.setItem('city', JSON.stringify(historyList));
+        localStorage.setItem('city', JSON.stringify(city));
+        historyList.push(city);
         console.log(localStorage);
     }
 });
 
 
-//* get information from api and show 
+//* get information from api and show
 
 function displayWeather(city) {
     let apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=imperial";
@@ -122,10 +123,7 @@ function recentCity(city) {
     historyList;
     JSON.parse(localStorage.getItem('historyList'));
 
-    if (city) {
-        historyList.push(city);
-    }
-
+    
     let list = document.createElement('li');
     list.textContent = city;
     list.setAttribute("class", "list");
@@ -155,6 +153,6 @@ function recentCity(city) {
 
 
 displayWeather(city)
-recentCity(city)
+
 
 
