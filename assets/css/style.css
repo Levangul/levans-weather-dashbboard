@@ -20,11 +20,10 @@ header {
 
 }
 
-.box {
-    display: flex;
-    flex-direction: row;
+.content {
+    
     font-size: 30px;
-    padding-left: 20px;  
+   
     
     
 }
@@ -39,7 +38,7 @@ section {
 
 button {
     background-color: #0074D9 ;
-    margin-top: 8px;
+    
     color: #f2f2f2;
     
     
@@ -59,10 +58,9 @@ button {
 }
 
 form {
-    display: flex;
-    flex-direction: column;
+    
     padding-right: 150px;
-    width: 200px;
+    
     
     
 }
@@ -70,7 +68,7 @@ form {
     display: flex;
     flex-direction: row;
     text-align: center;
-    padding: 15px;
+    justify-content: space-around;
     color: #f2f2f2;
     flex-wrap: wrap;
 }
@@ -88,13 +86,14 @@ body {
 .box {
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    
     padding-left: 0%;
     
 }
 aside {
-    display: flex;
-    align-items: center;
+    
+    flex-direction: column;
+    justify-content: center;
 }
 
 section {

@@ -123,11 +123,11 @@ function recentCity(city) {
     historyList;
     JSON.parse(localStorage.getItem('historyList'));
 
-    
+    for (let i = 0; i < city.length ; i++) {
     let list = document.createElement('li');
-    list.textContent = city;
+    list.textContent = city[i];
     list.setAttribute("class", "list");
-    searchHistory.appendChild(list);
+    searchHistory.appendChild(list); }
 
     console.log(historyList);
 
